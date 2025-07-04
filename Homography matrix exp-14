@@ -1,0 +1,12 @@
+import cv2
+import numpy as np
+image = cv2.imread('image.jpg')
+rows, cols = image.shape[:2]
+pts_src = np.float32([[100, 100], [400, 100], [100, 400], [400, 400]])
+pts_dst = np.float32([[80, 150], [420, 80], [100, 450], [420, 420]])
+H, _ = cv2.findHomography(pts_src, pts_dst)
+homography_transformed = cv2.warpPerspective(image, H, (cols, rows))
+cv2.imshow('Original Image', image)
+cv2.imshow('Homography Transformed Image', homography_transformed)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
